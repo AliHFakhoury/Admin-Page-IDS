@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain "transmessage" %}
+
+{% block body  %}
+
+    {% if app.request.locale == "ar" %}
+        {% include 'translation/TransAr.html.twig' %}
+    {% else %}
+        {% include 'translation/TransEng.html.twig' %}
+
+    {% endif %}
+
+    <body style="font-size:120%;" class="hold-transition skin-blue sidebar-mini">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <style type="text/css">
+        tfoot option {
+            width: 100%;
+            padding: 2px;
+            border:1px solid black;
+        }
+    </style>
+
+    <div class="wrapper">
+        {% include 'AdminHeader.html.twig' %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="min-height: 1000px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header" style="height: 50px;">
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Manage System Pages</li>
+                </ol>
+            </section>
+
+            <section class="content">
+                {% if canAdd %}
+                    <a href="{{ path('AddSystemPage',{'pageNumber':pageNumber,'language':app.request.locale}) }}" ><h4 style="margin-right: 4%;float: right;">{% trans into app.request.locale%} Add Page {% endtrans %}<i  class="material-icons">plus_one</i></h4></a>
+                {% endif %}
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">{% trans into app.request.locale%}System Pages{% endtrans %}</h3>
+                            </div>
+
+                            <div class="box-body no-padding">
+                                <table id="example"  class="table table-hover"  >
+                                    <thead>
+                                    <tr>
+                                        <th>{% trans into app.request.locale%}Page ID{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Page Name{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Page URL{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Page Role{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Actions{% endtrans %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for page in  pages %}
+                                        <tr>
+                                            <td> {{ page.id }} </td>
+                                            <td> {{ page.page_name }} </td>
+                                            <td> {{ page.page_url }} </td>
+                                            <td> {{ page.role_name }} </td>
+                                            <td>
+                                                {% if canEdit %}
+                                                    <a href="  {{ path('EditSystemPage',{'id':page.id,'pageNumber':pageNumber})}}"><i class="material-icons">mode_edit</i></a>
+                                                {% endif %}
+                                                {% if canDelete %}
+                                                    <a href="  {{ path('DeleteSystemPage',{'id':page.id,'pageNumber':pageNumber,'language':app.request.locale})}}"><i class="material-icons">&#xe872;</i></a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+
+                                <div class="box-footer clearfix" style="float:right;">
+                                    {% set link = '/talentsboard/web/app_dev.php/Admin/ManageSystemPages/' %}
+
+                                    {% include 'pagination/pagination.html.twig' with {
+                                    currentFilters: { 'pageNumber': pageNumber , 'language': app.request.locale },
+                                    currentPage: pageNumber,
+                                    paginationPath: link,
+                                    lastPage: numPages,
+                                    showAlwaysFirstAndLast: false
+                                    } only %}
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+    </body>
+
+
+{% endblock %}

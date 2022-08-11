@@ -1,0 +1,88 @@
+id: الهوية شخصية
+Firstname: الاسم الاول
+Lastname: الكنية
+Email: البريد الإلكتروني
+Nationality:  الجنسية
+Registration Date: تاريخ التسجيل
+Status: الحالة
+Actions: الافعال
+Admin Page: صفحة الآدمن
+Manage Users: ادارة المستخدمين
+Manage Events:  إدارة الأحداث
+Manage Categories: إدارة الفئات
+Manage Admins/Moderators: إدارة المشرفين
+View technical issues: عرض المشكلات الفنية
+View Reports: عرض التقارير
+View System Log: عرض سجل النظام
+MAIN NAVIGATION: الملاحة الرئيسية
+Online: متصل الآن
+Logout: الخروج
+Home: الصفحة الرئيسية
+View User: عرض المستخدم
+Back: الى الخلف
+Event Name: اسم الحدث
+Event Category: فئة الحدث
+Location: الموقع
+Event Date: تاريخ الحدث
+Max Attenders: الحد الأقصى للحضور
+Event Status: حالة الحدث
+Description:   وصف الحدث
+Events: الاحداث
+Role: الوظيفة
+Enabled: مفعل
+Time stamp: التاريخ
+Category: الفئة
+Add Admin: اضافة مشرف
+Manage Admins: إدارة المشرفين
+Admin Role: وظيفة المشرف
+Manage Admin: إدارة المشرف
+Update Admin: تحديث المشرف
+Password: كلمة السر
+Repeat Password: اعد ادخال كلمة السر
+Manage Category: ادارة الفئة
+Update Category: تحديث الفئة
+Parent Category: القسم الرئيسي
+Category name: اسم الفئة
+Categories: الفئات
+Parent: القسم الرئيسي
+Add Category: اضافة فئة
+From: من
+To: الى
+Username: اسم المستخدم
+First name: الاسم الاول
+Last name: الكنية
+Last namee: الكنية
+Event Holder: صاحب الحدث
+Timestamp: التاريخ
+Reset from: إخلاء
+Name: الاسم
+Permissions: صلاحيات
+Title: عنوان
+User Id: الهوية شخصية
+Date: التاريخ
+Ip: عنوان البروتوكول
+Browser: المطصحف
+Action: الفعل
+Table Name: اسم الجدول
+Holder Name: صاحب الحدث
+System Pages: صفحات النظام
+Page ID: هوية الصفحة
+Page Name: اسم الصفحة
+Page URL: رابط الصفحة
+Page Role: وظيفة الصفحة
+Add Page: اضافة صفحة
+Search: بحث
+Reports: تقارير
+User: المستخدم
+Question Name: اسم السؤال
+Question: السؤال
+Questions: الأسئلة
+Question ID: هوية السؤال
+Question Categories: فئات السؤال
+Users: المستخدمين
+System Logs: سجلات النظام
+Admin Id: هوية الآدمن
+Issued Id: هوية المستخدم
+View Technical Issues: عرض المشكلات الفنية
+Question Type: نوع السؤال
+Categories To Assign: تعيين الفئات

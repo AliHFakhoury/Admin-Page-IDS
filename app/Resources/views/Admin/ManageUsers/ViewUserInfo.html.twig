@@ -1,0 +1,97 @@
+
+{% extends 'base.html.twig' %}
+{% trans_default_domain "transmessage" %}
+
+
+{% block body  %}
+    {% if app.request.locale == "ar" %}
+
+        {% include 'translation/TransAr.html.twig' %}
+    {% else %}
+        {% include 'translation/TransEng.html.twig' %}
+
+    {% endif %}
+    <body style="font-size:120%;" class="hold-transition skin-blue sidebar-mini">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <div id="container">
+
+        <div class="wrapper">
+            {% include 'AdminHeader.html.twig' %}
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+
+                <section class="content-header">
+                    <a href="{{ path('Users',{'language' : app.request.locale,'pageNumber':pageNumber})}}"  style="color:white;background-color:rgb(60,141,188)" class="btn btn-primary" ><i style="font-size:15px" class="material-icons">fast_rewind</i>{% trans into app.request.locale%}Back{% endtrans %}</a>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> {% trans into app.request.locale%}Home{% endtrans %}</a></li>
+                        <li class="active">{% trans into app.request.locale%}Manage Users{% endtrans %}</li>
+                        <li class="active">{% trans into app.request.locale%}View User{% endtrans %}</li>
+                    </ol>
+                </section>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img class="img-circle avatar avatar-original" style="-webkit-user-select:none;
+              display:block; margin:auto;height: 150px; width: 150px;" src="{{ asset('images/redfern.jpg') }}" >
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <h3 class="only-bottom-margin">Account Infromation</h3>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-6">
+                               {% if user is defined %}
+                                    <h5><span class="text-muted">{% trans into app.request.locale%}id{% endtrans %}:</span>{{ user.user_id }}</h5>
+                                    <h5><span class="text-muted">{% trans into app.request.locale%}Email{% endtrans %}:</span> {{ user.user_email }}</h5>
+                                    <h5><span class="text-muted">{% trans into app.request.locale%}Registration Date{% endtrans %}:</span> {{ user.registration_date|date('Y-m-d') }}</h5>
+                                    <h5><span class="text-muted"> {% trans into app.request.locale%}Category{% endtrans %}:</span>{{ user.category_name }}</h5>
+                                    <h5><span class="text-muted">{% trans into app.request.locale%}Status{% endtrans %}:</span>{{  user.user_status_name  }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-md-4 text-center">
+
+                        </div>
+                        <div class="col-md-8">
+                            <hr>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <h3 class="only-bottom-margin">Personal Information</h3>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <h5><span class="text-muted">{% trans into app.request.locale%}First name: {% endtrans %}</span>{{ user.first_name }}</h5>
+                                    <h5><span class="text-muted">{% trans into app.request.locale%}Last name: {% endtrans %}</span>{{ user.last_name }}</h5>
+                                    <h5><span class="text-muted">{% trans into app.request.locale%}Nationality: {% endtrans %}</span> {{  user.country_name }}</h5>
+                                    <h5><span class="text-muted">Birth Date:</span>{{  user.birth_date|date('Y-m-d') }}</h5>
+                                    <h5><span class="text-muted">Age:</span>{{  user.age }}</h5>
+
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    </body>
+
+
+{% endblock %}

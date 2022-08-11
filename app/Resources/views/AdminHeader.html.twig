@@ -1,0 +1,57 @@
+{% block AdminPageHeader %}
+    {% trans_default_domain "transmessage" %}
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>A</b>D.</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>{% trans into app.request.locale%}Admin Page{% endtrans %}</b></span>
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+
+            <a href="{{ path('logout') }}" {% if app.request.locale == "ar" %}style="float:left;margin-right: 1%; margin-left:5%;margin-top:0.5%"{% else %}style="float:right;margin-left: 1%; margin-right:5%;margin-top:0.5%"{% endif %} class="btn btn-info">{% trans into app.request.locale%}Logout{% endtrans %}</a>
+            <a class="btn btn-warning btn-xs"  href="{{ path('Users', {'language' : 'en', 'pageNumber' : 1}) }}" {% if app.request.locale == "ar" %}style="float:left;margin-top:1%;margin-right:0.7%;"{% else %}style="float:right;margin-top:1%"{% endif %}>en</a>
+            <a class="btn btn-warning btn-xs" href="{{  path('Users', {'language' : 'ar', 'pageNumber' : 1}) }}" {% if app.request.locale == "ar" %}style="float:left;margin-top:1%;"{% else %}style="float:right;margin-top:1%;margin-right:0.7%;"{% endif %}>ar</a>
+
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+        </nav>
+
+    </header>
+
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{ asset('images/admin.png') }}" class="img" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>Mostafa Hummaida</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i>{% trans into app.request.locale%} Online {% endtrans %}</a>
+                </div>
+
+            </div>
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="header">{% trans into app.request.locale%}MAIN NAVIGATION{% endtrans %}</li>
+
+
+                {% for systemPage in userPages %}
+                    <li class="treeview">
+                        <a href="{{ path(systemPage['page_url'],{'pageNumber':1, 'language' : app.request.locale}) }}">
+                            <i class="fa fa-folder" style="color: darkkhaki"></i> <span>{{ systemPage["page_name"] }}</span>
+                        </a>
+                    </li>
+                {%  endfor %}
+            </ul></section>
+
+
+        <!-- /.sidebar -->
+    </aside>
+{% endblock %}

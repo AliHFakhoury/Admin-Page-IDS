@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain "transmessage" %}
+
+{% block stylesheets %}
+    <style>
+        #pagination{
+            float: right;
+            margin-right: 2%;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body  %}
+    {% if app.request.locale == "ar" %}
+
+        {% include 'translation/TransAr.html.twig' %}
+    {% else %}
+        {% include 'translation/TransEng.html.twig' %}
+
+    {% endif %}
+
+    <body style="font-size:120%;" class="hold-transition skin-blue sidebar-mini">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
+    <div id="container">
+        <div class="wrapper">
+
+            {% include 'AdminHeader.html.twig' %}
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper" style="min-height: 1000px;">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i>{% trans into app.request.locale%} Home{% endtrans %}</a></li>
+                        <li class="active">{% trans into app.request.locale%}Manage Admins{% endtrans %}</li>
+                    </ol>
+                </section>
+
+                <section class="content" style="margin-top: 2%">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-primary" style="width: 100%;">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Search</h3>
+                                </div>
+                                {{ form_start(form,{'attr': {'id': 'Form'}}) }}
+
+
+                                <h4>{% trans into app.request.locale%}Category{% endtrans %} </h4> {{ form_widget(form.categoryName) }}
+                                <h4>{% trans into app.request.locale%}Parent Category{% endtrans %}</h4>{{ form_widget(form.parentCategory) }}
+                                <p></p>
+                                {{ form_widget(form.Submit)}}
+                                {{ form_widget(form.Clear)}}
+
+                                {{ form_end(form)}}
+                                <p></p>
+                                <a href="{{ path('ManageCategories',{'pageNumber':pageNumber,'language':app.request.locale}) }}"  style="color:white;background-color:rgb(60,141,188)" class="btn btn-primary" >{% trans into app.request.locale%}Back{% endtrans %}</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    </body>
+
+
+{% endblock %}

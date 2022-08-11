@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain "transmessage" %}
+
+{% block body  %}
+
+    {% if app.request.locale == "ar" %}
+        {% include 'translation/TransAr.html.twig' %}
+    {% else %}
+        {% include 'translation/TransEng.html.twig' %}
+
+    {% endif %}
+
+    <body style="font-size:120%;" class="hold-transition skin-blue sidebar-mini">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <style type="text/css">
+        tfoot option {
+            width: 100%;
+            padding: 2px;
+            border:1px solid black;
+        }
+    </style>
+
+    <div class="wrapper">
+        {% include 'AdminHeader.html.twig' %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="min-height: 1000px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header" style="height: 50px;">
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">View System Logs</li>
+                </ol>
+            </section>
+
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">{% trans into app.request.locale%}System Logs{% endtrans %}</h3>
+                            </div>
+
+                            <div class="box-body no-padding">
+                                <table id="example"  class="table table-hover"  >
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{% trans into app.request.locale%}Admin Id{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Issued Id{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Table Name{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Action{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Description{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Date{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Ip{% endtrans %}</th>
+                                        <th>{% trans into app.request.locale%}Time stamp{% endtrans %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for log in  viewLogs %}
+                                        <tr>
+                                            <td> {{ log.id }} </td>
+                                            <td> {{ log.admin_id }} </td>
+                                            <td> {{ log.user_id }} </td>
+                                            <td> {{ log.table_name }} </td>
+                                            <td> {{ log.action }} </td>
+                                            <td>{{ log.description }}</td>
+                                            <td>{{ log.date|date('Y-m-d') }}</td>
+                                            <td>{{ log.ip }}</td>
+                                            <td>{{ log.timestamp|date('Y-m-d h m s') }}</td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+
+                                <div class="box-footer clearfix" style="float:right;">
+                                    {% set link = '/talentsboard/web/app_dev.php/Admin/ViewSystemLog/' %}
+
+                                    {% include 'pagination/pagination.html.twig' with {
+                                    currentFilters: { 'pageNumber': pageNumber , 'language': app.request.locale },
+                                    currentPage: pageNumber,
+                                    paginationPath: link,
+                                    lastPage: numPages,
+                                    showAlwaysFirstAndLast: false
+                                    } only %}
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+    </body>
+
+
+{% endblock %}

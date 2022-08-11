@@ -1,0 +1,60 @@
+
+security:
+    access_control:
+      - {path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - {path: ^/Admin/ManageUsers, role: ROLE_ADMIN}
+      - {path: ^/Admin/Events, role: ROLE_ADMIN}
+      - {path: ^/Admin/ManageCategories, role: ROLE_ADMIN}
+      - {path: ^/Admin/ManageAdmins, role: ROLE_ADMIN}
+      - {path: ^/Admin/ManageAdmins, role: ROLE_ADMIN}
+      - {path: ^/Admin/ManageCategories, role: ROLE_ADMIN}
+      - {path: ^/Admin/ViewTechIssues, role: ROLE_ADMIN}
+      - {path: ^/Admin/ViewReports, role: ROLE_ADMIN}
+      - {path: ^/Admin/ViewSystemLog, role: ROLE_ADMIN}
+      - {path: ^/Admin/ManageAdmins/AddAdmin, role: ROLE_ADMIN}
+      - {path: ^/Admin/ManageUsers/display, role: ROLE_ADMIN}
+      - {path: ^/Admin/ManageAdmins/UpdateAdmin, role: ROLE_ADMIN}
+      - {path: ^/Admin/ManageCategories/UpdateCategories, role: ROLE_ADMIN}
+      - {path: ^/, role: ROLE_ADMIN}
+
+    role_hierarchy:
+      ROLE_ADMIN: [ROLE_USER]
+
+    encoders:
+      AppBundle\Entity\admin:
+        algorithm: bcrypt
+      Symfony\Component\Security\Core\User\User:
+        algorithm: bcrypt
+
+    providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, db_provider]
+        db_provider:
+          entity:
+            class: AppBundle\Entity\admin
+            property: email
+        in_memory:
+            memory:
+              users:
+                admin:
+                  password: #PASSWORD
+                  roles: 'ROLE_ADMIN'
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            provider: db_provider
+            form_login:
+              login_path: login
+              check_path: login
+              default_target_path: /Admin/ManageUsers/en/1
+            logout:
+               path:   /logout
+               target: /login
+            anonymous: ~
